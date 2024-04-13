@@ -44,6 +44,7 @@ function App(): React.JSX.Element {
   const handleReset = () => {
     setIsRunning(false);
     setElapsedTime(0);
+    setPrevElapsedTime(0);
     setLaps([]);
   };
 
