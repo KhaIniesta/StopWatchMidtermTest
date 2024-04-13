@@ -88,12 +88,10 @@ function App(): React.JSX.Element {
       </View>
 
       <View style={styles.lapsContainer}>
-        {evenStart ? (
-          <View style={styles.lap}>
-            <Text>Lap {laps.length + 1}:</Text>
-            <Text>{formatTime(elapsedTime)}</Text>
-          </View>
-        ) : null}
+        <View style={styles.lap}>
+          <Text style={{color: 'white'}}>Current Lap:</Text>
+          <Text style={{color: 'white'}}>{formatTime(elapsedTime-prevElapsedTime)}</Text>
+        </View>
         <View>
           {laps.map((lap, index) => (
             <View key={index} style={styles.lap}>
