@@ -4,7 +4,7 @@ import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 function App(): React.JSX.Element {
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [prevElapsedTime, setPrevElapsedTime] = useState(0)
+  const [prevElapsedTime, setPrevElapsedTime] = useState(0);
   const [laps, setLaps] = useState<number[]>([]);
   const [lapOrResetText, setLapOrResetText] = useState('Lap');
   const [evenStart, setEvenStart] = useState(false);
@@ -48,8 +48,8 @@ function App(): React.JSX.Element {
   };
 
   const handleRecordLap = () => {
-    setLaps(prevLaps => [...prevLaps, elapsedTime-prevElapsedTime]);
-    setPrevElapsedTime(elapsedTime)
+    setLaps(prevLaps => [...prevLaps, elapsedTime - prevElapsedTime]);
+    setPrevElapsedTime(elapsedTime);
   };
 
   const formatTime = (timeInSeconds: number): string => {
@@ -88,10 +88,12 @@ function App(): React.JSX.Element {
       </View>
 
       <View style={styles.lapsContainer}>
-        <View style={styles.lap}>
-          <Text style={{color: 'white'}}>Current Lap:</Text>
-          <Text style={{color: 'white'}}>{formatTime(elapsedTime-prevElapsedTime)}</Text>
-        </View>
+        {evenStart ? (
+          <View style={styles.lap}>
+            <Text style={{color: 'white'}}>Lap {laps.length + 1}:</Text>
+            <Text style={{color: 'white'}}>{formatTime(elapsedTime-prevElapsedTime)}</Text>
+          </View>
+        ) : null}
         <View>
           {laps.map((lap, index) => (
             <View key={index} style={styles.lap}>
