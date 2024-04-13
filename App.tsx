@@ -4,6 +4,7 @@ import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 function App(): React.JSX.Element {
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [prevElapsedTime, setPrevElapsedTime] = useState(0)
   const [laps, setLaps] = useState<number[]>([]);
   const [lapOrResetText, setLapOrResetText] = useState('Lap');
   const [evenStart, setEvenStart] = useState(false);
@@ -47,7 +48,8 @@ function App(): React.JSX.Element {
   };
 
   const handleRecordLap = () => {
-    setLaps(prevLaps => [...prevLaps, elapsedTime]);
+    setLaps(prevLaps => [...prevLaps, elapsedTime-prevElapsedTime]);
+    setPrevElapsedTime(elapsedTime)
   };
 
   const formatTime = (timeInSeconds: number): string => {
